@@ -12,6 +12,7 @@ import fr.diginamic.recensement.services.RechercheRegionsPlusPeuplees;
 import fr.diginamic.recensement.services.RechercheVillesPlusPeupleesDepartement;
 import fr.diginamic.recensement.services.RechercheVillesPlusPeupleesFrance;
 import fr.diginamic.recensement.services.RechercheVillesPlusPeupleesRegion;
+import fr.diginamic.recensement.utils.CodeDeptException;
 import fr.diginamic.recensement.utils.RecensementUtils;
 
 /**
@@ -66,7 +67,11 @@ public class Application {
 				break;
 			case 4:
 				RecherchePopulationBorneService recherchePopBorne = new RecherchePopulationBorneService();
-				recherchePopBorne.traiter(recensement, scanner);
+					try {
+						recherchePopBorne.traiter(recensement, scanner);
+					} catch (CodeDeptException e) {
+						System.err.println(e.getMessage());
+					}
 				break;
 			case 5:
 				RechercheVillesPlusPeupleesDepartement rechercheVillesPlusPeupleesDepartement = new RechercheVillesPlusPeupleesDepartement();
